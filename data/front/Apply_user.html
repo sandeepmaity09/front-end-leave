@@ -178,7 +178,7 @@
 				 						</div>
                                          <div class="col-md-4">
 				 							 <div class="form-group label-floating">
-                                                  <select id="typess" name="form-control" style="width: 300px; height: 30px;">
+                                                  <select id="typess" name="typess" class="form-control" style="width: 300px; height: 30px;">
                                                         <option value="" disabled selected> Type of Leave </option>
                                                         <option value="cl">cl</option>
                                                         <option value="pl">pl</option>
@@ -242,6 +242,18 @@
 		// }
 		}
 
+
+		function getData(){
+
+			var deptName = $("#dept-name").val();
+			var userId = $("#username").val();
+			var startDate = $("#start-date").val();
+			var endDate = $("#end-date").val();
+			// var tnd = $("#tnd").val();
+			var reason = $("#reason").val();
+			var typess = $("#typess option:selected").text();
+		}
+
 		function showData(){
 
 		var deptName = $("#dept-name").val();
@@ -255,8 +267,11 @@
 		// var diff = new Date(endDate - startDate);
 		// var days = diff/1000/60/60/24;
 
+		// getData();
+
 		var days = CalculateDiff();
 		var tnd = days;
+
 		$("#tnd").text(tnd);
 
 			console.log("dept "+deptName);
@@ -274,9 +289,10 @@
 			console.log("user_id "+user);
 
 
-			$.post("http://139.59.68.188:3000/applyLeave?user="+user+"&"+"reason="+reason+"&"+"type="+typess+"&"+"days="+days,function(data){
+			$.post("http://139.59.34.118:3000/applyLeave?user="+user+"&"+"reason="+reason+"&"+"type="+typess+"&"+"days="+days,function(data){
 				console.log(data);
-				window.navigation
+				alert("Leave Applied");
+				window.location.href = "index_user.html";
 			});
 		}
 

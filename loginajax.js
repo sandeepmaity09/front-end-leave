@@ -88,6 +88,7 @@
 // 	});
 // });
 
+
 $(doucment).ready(function(){
 	$("#generate-otp").on("click",function(){
 

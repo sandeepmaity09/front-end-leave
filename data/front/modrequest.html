@@ -204,7 +204,7 @@
 
 					$.ajax({
 						type:"GET",
-						url:"http://139.59.68.188:3000/getUserDetails?id="+user,
+						url:"http://139.59.34.118:3000/getUserDetails?id="+user,
 						//data:{id:this.user},
 						success:function(data){
 							console.log("success");
@@ -255,7 +255,7 @@
 				console.log(leave_id);
 
 				if (identity.startsWith('accept')){
-					$.post("http://139.59.68.188:3000/changeStatus?id="+leave_id+"&"+"status=Acccepted",function(data){
+					$.post("http://139.59.34.118:3000/changeStatus?id="+leave_id+"&"+"status=Acccepted",function(data){
 						console.log(data);
 					});
 					console.log('if true');
@@ -264,7 +264,7 @@
 
 					$('#decline-'+num).hide();
 				} else {
-						$.post("http://139.59.68.188:3000/changeStatus?id="+leave_id+"&"+"status=Rejected",function(data){
+						$.post("http://139.59.34.118:3000/changeStatus?id="+leave_id+"&"+"status=Rejected",function(data){
 						console.log(data);
 					});
 					console.log('in else')
