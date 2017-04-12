@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--================================================================================
+	Item Name: Materialize - Material Design Admin Template
+	Version: 2.3
+	Author: GeeksLabs
+	Author URL: http://www.themeforest.net/user/geekslabs
+================================================================================ -->
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google. ">
+  <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template,">
+  <title>Login Page</title>
+
+  <!-- Favicons-->
+  <!-- <link rel="icon" href="images/favicon/favicon-32x32.png" sizes="32x32"> -->
+  <!-- Favicons-->
+  <!-- <link rel="apple-touch-icon-precomposed" href="images/favicon/apple-touch-icon-152x152.png"> -->
+  <!-- For iPhone -->
+  <meta name="msapplication-TileColor" content="#00bcd4">
+  <meta name="msapplication-TileImage" content="images/favicon/mstile-144x144.png">
+  <!-- For Windows Phone -->
+
+
+  <!-- CORE CSS-->
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
+
+   <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+
+  <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
+
+</head>
+
+<body class="cyan">
+  <div id="otp-login-page" class="row">
+    <div class="col s12 z-depth-4 card-panel">
+      <form class="login-form">
+        <div class="row">
+          <div class="input-field col s12 center">
+            <p class="center login-form-text">Enter OTP</p>
+          </div>
+        </div>
+        <div class="row margin">
+
+          <div class="input-field col s12">
+
+            <input id="otp" type="text">
+            <label for="otp" class="center-align">OTP</label>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="input-field col s12">
+            <div id="otp-login" class="btn waves-effect waves-light col s12">Login</>
+          </div>
+        </div>
+
+
+      </form>
+    </div>
+  </div>
+  <script type="text/javascript">
+//           console.log("hello");
+
+// function getQueryStrings() { 
+//   var assoc  = {};
+//   var decode = function (s) { return decodeURIComponent(s.replace(/\+/g, " ")); };
+//   var queryString = location.search.substring(1); 
+//   var keyValues = queryString.split('&'); 
+
+//   for(var i in keyValues) { 
+//     var key = keyValues[i].split('=');
+//     if (key.length > 1) {
+//       assoc[decode(key[0])] = decode(key[1]);
+//     }
+//   } 
+
+//   return assoc; 
+// } 
+
+// var qs = getQueryStrings();
+// var myParam = qs["email"];
+// var email = myParam;
+
+// console.log(email);
+
+
+      function getData(){
+        var otp = $("#otp").val();
+        var email = localStorage.getItem("username");
+
+        console.log("request");
+
+        $.post("http://139.59.34.118:3000/matchOtp?email="+email+"&"+"otp="+otp,
+          function(data){
+            console.log(data);
+
+            localStorage.setItem("user_id",data._id);
+
+            if(data.role === "A")
+              window.location.href = "data/front/adminhome.html";
+            else if(data.role === "M")
+              window.location.href = "data/front/modrequest.html";
+          	else
+          	  window.location.href = "data/front/index_user.html";
+          
+          // console.log(data);
+          // $("#response").text(JSON.stringify(data));
+          // $("#login-page").load("template.html");
+          // if(data)
+          // window.location.replace("adminotplogin.html");
+          
+          });
+      console.log("response");
+    }
+
+    $("#otp-login").on("click", function(){
+      getData();
+    });
+  </script>
+</body>
+
+</html>
